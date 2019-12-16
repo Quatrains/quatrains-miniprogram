@@ -1,11 +1,15 @@
 {
   "extends": ["taro"],
   "rules": {
+    "jsx-quotes": "off",
     "no-unused-vars": ["error", { "varsIgnorePattern": "Taro" }],
     "react/jsx-filename-extension": [
       1,
       { "extensions": [".js", ".jsx", ".tsx"] }
     ]
   },
-  "parser": "babel-eslint"
+  "parser": "babel-eslint",
+  "globals": {
+    "wx": "readonly"
+  }
 }

@@ -1,15 +1,16 @@
 {
-  "miniprogramRoot": "dist/",
-  "projectname": "quatrains-miniprogram",
-  "description": "",
-  "appid": "wxaef2b1a656821b49",
-  "setting": {
-    "urlCheck": true,
-    "es6": false,
-    "postcss": false,
-    "minified": false,
-    "newFeature": true
-  },
-  "compileType": "miniprogram",
-  "condition": {}
+	"miniprogramRoot": "dist/",
+	"projectname": "quatrains-miniprogram",
+	"description": "",
+	"appid": "wxaef2b1a656821b49",
+	"setting": {
+		"urlCheck": false,
+		"es6": false,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false
+	},
+	"compileType": "miniprogram",
+	"condition": {}
 }
