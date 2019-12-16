@@ -1,17 +1,25 @@
-import Taro, { useEffect } from "@tarojs/taro";
+import Taro, { useState, useEffect } from "@tarojs/taro";
 import { View, Text } from "@tarojs/components";
 import "./index.less";
 
 const Index = () => {
+  const [data, setData] = useState(null);
+
   useEffect(() => {
-    Taro.request({ url: `http://localhost:8888/user/login` }).then(res => {
-      console.log(res.json);
-    });
+    const runner = async () => {
+      const { data: res } = await Taro.request({
+        url: `http://localhost:8888/user/login`
+      });
+      setData(res);
+    };
+    runner();
   }, []);
+
+  if (!data) return <View>Loading...</View>;
 
   return (
     <View className="index">
-      <Text>Hello 绝句!</Text>
+      <Text>{data.res}</Text>
     </View>
   );
 };
