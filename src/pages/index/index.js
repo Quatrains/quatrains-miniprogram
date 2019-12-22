@@ -1,16 +1,16 @@
 import Taro, { useState, useEffect } from "@tarojs/taro";
 import { View, Text } from "@tarojs/components";
 import "./index.less";
+import { preLogin, fetch } from "../../action/fetch";
 
 const Index = () => {
   const [data, setData] = useState(null);
 
   useEffect(() => {
     const runner = async () => {
-      const { data: res } = await Taro.request({
-        url: `http://localhost:8888/user/login`
-      });
-      setData(res);
+      await preLogin();
+      const res = await fetch("/recommend/daily_poetry");
+      setData(res.poetry);
     };
     runner();
   }, []);
@@ -19,7 +19,7 @@ const Index = () => {
 
   return (
     <View className="index">
-      <Text>{data.res}</Text>
+      <Text>{data}</Text>
     </View>
   );
 };

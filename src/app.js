@@ -1,5 +1,5 @@
 import Taro, { Component } from "@tarojs/taro";
-import Index from "./pages/index";
+import Index from "./pages/index/index";
 
 import "./app.less";
 
@@ -19,7 +19,7 @@ class App extends Component {
   componentDidCatchError() {}
 
   config = {
-    pages: ["pages/index/index"],
+    pages: ["pages/index/index", "pages/login/index"],
     window: {
       backgroundTextStyle: "light",
       navigationBarBackgroundColor: "#fff",
