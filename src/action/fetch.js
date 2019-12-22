@@ -50,7 +50,7 @@ const fetch = async (url, options) => {
     setStorage(STORAGE_KEY_COOKIE);
   }
 
-  // 3) 处理异常状态码
+  // 3) 处理状态码
   if (res.statusCode === 200) {
     return res.data;
   }
