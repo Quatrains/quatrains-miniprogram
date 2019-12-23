@@ -19,7 +19,25 @@ class App extends Component {
   componentDidCatchError() {}
 
   config = {
-    pages: ["pages/index/index", "pages/login/index"],
+    tabBar: {
+      custom: false,
+      color: "#dddddd",
+      selectedColor: "#5983f0",
+      backgroundColor: "#fff",
+      list: [
+        {
+          pagePath: "pages/index/index",
+          // iconPath: "",
+          text: "首页"
+        },
+        {
+          pagePath: "pages/mine/index",
+          // iconPath: "",
+          text: "我的"
+        }
+      ]
+    },
+    pages: ["pages/index/index", "pages/login/index", "pages/mine/index"],
     window: {
       backgroundTextStyle: "light",
       navigationBarBackgroundColor: "#fff",

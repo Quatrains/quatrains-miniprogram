@@ -9,8 +9,8 @@ const Index = () => {
   useEffect(() => {
     const runner = async () => {
       await preLogin();
-      const res = await fetch("/recommend/daily_poetry");
-      setData(res.poetry);
+      // const res = await fetch("/daily_poetry");
+      // setData(res.poetry);
     };
     runner();
   }, []);

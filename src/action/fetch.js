@@ -10,17 +10,18 @@ const preLogin = async () => {
   // 1. 从微信获取code
   const { code } = await Taro.login();
   // 2. 将code发送给服务端，获取cookie
-  const { cookies } = await Taro.request({
+  const { header } = await Taro.request({
     url: `${API_PREFIX}/user/login`,
     method: "POST",
     data: {
       code
     }
   });
+  const cookie = header["Set-Cookie"];
   // 3. 将cookie存入storage
-  setStorage(STORAGE_KEY_COOKIE, cookies[0]);
-  // 4. 返回cookie
-  return cookies[0];
+  setStorage(STORAGE_KEY_COOKIE, cookie);
+  // // 4. 返回cookie
+  return cookie;
 };
 
 const fetch = async (url, options) => {
