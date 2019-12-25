@@ -1,19 +1,48 @@
 import Taro, { useEffect } from "@tarojs/taro";
-import { View, Text } from "@tarojs/components";
+import { View, Text, Image } from "@tarojs/components";
+import likeIcon from "../../assets/icons/like.png";
+import aboutIcon from "../../assets/icons/about.png";
+import calendarIcon from "../../assets/icons/calendar.png";
 import "./index.less";
 
 const Index = () => {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    // TODO: 获取头像
+    (async () => {
+      // const info = await Taro.getUserInfo();
+      // console.log(info);
+    })();
+  }, []);
 
   return (
-    <View className="index">
-      <Text>我的</Text>
+    <View className="mine">
+      <View className="mine-banner">
+        <View className="mine-banner-info">
+          <View className="mine-banner-nickname">Shingo</View>
+          <View className="mine-banner-days">已加入 61 天</View>
+        </View>
+        <Image className="mine-banner-image" src={calendarIcon} />
+      </View>
+      <View className="mine-content">
+        <View className="mine-content-item">
+          <Image className="mine-content-item-image" src={likeIcon} />
+          <Text className="mine-content-item-text">我的喜欢</Text>
+        </View>
+        <View className="mine-content-item">
+          <Image className="mine-content-item-image" src={calendarIcon} />
+          <Text className="mine-content-item-text">诗词日历</Text>
+        </View>
+        <View className="mine-content-item">
+          <Image className="mine-content-item-image" src={aboutIcon} />
+          <Text className="mine-content-item-text">关于我们</Text>
+        </View>
+      </View>
     </View>
   );
 };
 
 Index.config = {
-  navigationBarTitleText: "我的"
+  navigationBarTitleText: ""
 };
 
 export default Index;
