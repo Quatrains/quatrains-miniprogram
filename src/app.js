@@ -21,7 +21,7 @@ class App extends Component {
   config = {
     tabBar: {
       custom: false,
-      color: "#ddd",
+      color: "#999",
       selectedColor: "#CB4042",
       backgroundColor: "#fff",
       list: [
