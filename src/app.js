@@ -21,23 +21,36 @@ class App extends Component {
   config = {
     tabBar: {
       custom: false,
-      color: "#dddddd",
-      selectedColor: "#5983f0",
+      color: "#ddd",
+      selectedColor: "#CB4042",
       backgroundColor: "#fff",
       list: [
         {
           pagePath: "pages/index/index",
-          // iconPath: "",
+          iconPath: "assets/icons/index.png",
+          selectedIconPath: "assets/icons/index_selected.png",
           text: "首页"
         },
         {
+          pagePath: "pages/find/index",
+          iconPath: "assets/icons/find.png",
+          selectedIconPath: "assets/icons/find_selected.png",
+          text: "发现"
+        },
+        {
           pagePath: "pages/mine/index",
-          // iconPath: "",
+          iconPath: "assets/icons/mine.png",
+          selectedIconPath: "assets/icons/mine_selected.png",
           text: "我的"
         }
       ]
     },
-    pages: ["pages/index/index", "pages/login/index", "pages/mine/index"],
+    pages: [
+      "pages/index/index",
+      "pages/login/index",
+      "pages/find/index",
+      "pages/mine/index"
+    ],
     window: {
       backgroundTextStyle: "light",
       navigationBarBackgroundColor: "#fff",
