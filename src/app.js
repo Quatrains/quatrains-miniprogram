@@ -32,12 +32,12 @@ class App extends Component {
           selectedIconPath: "assets/icons/index_selected.png",
           text: "首页"
         },
-        {
-          pagePath: "pages/find/index",
-          iconPath: "assets/icons/find.png",
-          selectedIconPath: "assets/icons/find_selected.png",
-          text: "发现"
-        },
+        // {
+        //   pagePath: "pages/find/index",
+        //   iconPath: "assets/icons/find.png",
+        //   selectedIconPath: "assets/icons/find_selected.png",
+        //   text: "发现"
+        // },
         {
           pagePath: "pages/mine/index",
           iconPath: "assets/icons/mine.png",

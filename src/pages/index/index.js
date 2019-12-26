@@ -4,7 +4,11 @@ import "./index.less";
 import { preLogin, fetch } from "../../action/fetch";
 
 const Index = () => {
-  const [data, setData] = useState(123);
+  const [data, setData] = useState({
+    title: "静夜思",
+    author: "李白",
+    content: ["床前明月光，", "疑是地上霜。", "举头望明月，", "低头思故乡。"]
+  });
 
   useEffect(() => {
     const runner = async () => {
@@ -15,13 +19,25 @@ const Index = () => {
     runner();
   }, []);
 
-  if (!data) {
-    Taro.showLoading();
-  }
+  // TODO: 骨架屏
+  if (!data) return <View>Loading...</View>;
 
   return (
     <View className="index">
-      <Text>{data}</Text>
+      <View className="index-poetry">
+        <View className="poetry-banner">
+          <View className="poetry-title">{data.title}</View>
+          <View className="poetry-author">{data.author}</View>
+        </View>
+        <View className="poetry-content">
+          {data.content.map(c => (
+            <View className="poetry-content-line" key={c}>
+              {c}
+            </View>
+          ))}
+        </View>
+      </View>
+      <View className="index-bottom"></View>
     </View>
   );
 };

@@ -36,7 +36,7 @@ const Index = () => {
             className="mine-banner-nickname"
             onClick={() => {
               !isAuthorized
-                ? Taro.navigateTo({ url: "/pages/login/index?next_url=mine" })
+                ? Taro.navigateTo({ url: "/pages/login/index" })
                 : null;
             }}
           >
