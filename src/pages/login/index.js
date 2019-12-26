@@ -5,7 +5,9 @@ import "./index.less";
 // 授权功能
 const Index = () => {
   const getUserInfo = async ({ detail }) => {
-    console.log(detail);
+    if (detail.errMsg === "getUserInfo:ok") {
+      Taro.switchTab({ url: "/pages/mine/index" });
+    }
   };
 
   return (
@@ -18,7 +20,7 @@ const Index = () => {
 };
 
 Index.config = {
-  navigationBarTitleText: "登录页"
+  navigationBarTitleText: "登录"
 };
 
 export default Index;

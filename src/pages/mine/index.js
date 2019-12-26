@@ -1,27 +1,50 @@
-import Taro, { useEffect } from "@tarojs/taro";
+import Taro, { useState, useDidShow } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
+import snowmanIcon from "../../assets/icons/snowman.png";
 import likeIcon from "../../assets/icons/like.png";
 import aboutIcon from "../../assets/icons/about.png";
 import calendarIcon from "../../assets/icons/calendar.png";
 import "./index.less";
 
 const Index = () => {
-  useEffect(() => {
-    // TODO: 获取头像
+  const [isAuthorized, setAuthorize] = useState(false);
+  const [info, setInfo] = useState({ nickName: "", avatarUrl: "" });
+
+  useDidShow(() => {
     (async () => {
-      // const info = await Taro.getUserInfo();
-      // console.log(info);
+      const { authSetting } = await Taro.getSetting();
+      if (authSetting["scope.userInfo"]) {
+        setAuthorize(true);
+        const { userInfo } = await Taro.getUserInfo();
+        setInfo(userInfo);
+      } else {
+        setAuthorize(false);
+        setInfo({ nickName: "登入", avatarUrl: snowmanIcon });
+      }
     })();
   }, []);
+
+  if (!info.nickName || !info.avatarUrl) {
+    return null;
+  }
 
   return (
     <View className="mine">
       <View className="mine-banner">
         <View className="mine-banner-info">
-          <View className="mine-banner-nickname">Shingo</View>
+          <View
+            className="mine-banner-nickname"
+            onClick={() => {
+              !isAuthorized
+                ? Taro.navigateTo({ url: "/pages/login/index?next_url=mine" })
+                : null;
+            }}
+          >
+            {info.nickName}
+          </View>
           <View className="mine-banner-days">已加入 61 天</View>
         </View>
-        <Image className="mine-banner-image" src={calendarIcon} />
+        <Image className="mine-banner-image" src={info.avatarUrl} />
       </View>
       <View className="mine-content">
         <View className="mine-content-item">

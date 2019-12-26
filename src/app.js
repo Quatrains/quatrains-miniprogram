@@ -1,5 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import Index from "./pages/index/index";
+import color from "./constants/color";
 
 import "./app.less";
 
@@ -22,7 +23,7 @@ class App extends Component {
     tabBar: {
       custom: false,
       color: "#999",
-      selectedColor: "#CB4042",
+      selectedColor: "#cb4042",
       backgroundColor: "#fff",
       list: [
         {
