@@ -1,7 +1,8 @@
 import Taro, { useState, useEffect } from "@tarojs/taro";
-import { View } from "@tarojs/components";
-import "./index.less";
+import { View, Image } from "@tarojs/components";
 import { preLogin, fetch } from "../../action/fetch";
+import likeIcon from "../../assets/icons/like.png";
+import "./index.less";
 
 const Index = () => {
   const [data, setData] = useState(null);
@@ -14,6 +15,16 @@ const Index = () => {
     };
     runner();
   }, []);
+
+  const handleLike = async () => {
+    await fetch("/user/favorite", {
+      method: "POST",
+      body: {
+        poetry_id: data.poetry.id
+      }
+    });
+    Taro.showToast({ title: "收藏成功～", icon: "none" });
+  };
 
   // TODO: 骨架屏
   if (!data) return <View>Loading...</View>;
@@ -33,7 +44,13 @@ const Index = () => {
           ))}
         </View>
       </View>
-      <View className="index-bottom"></View>
+      <View className="index-bottom">
+        <Image
+          className="index-bottom-like"
+          src={likeIcon}
+          onClick={handleLike}
+        />
+      </View>
     </View>
   );
 };

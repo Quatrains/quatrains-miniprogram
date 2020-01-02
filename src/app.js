@@ -50,7 +50,10 @@ class App extends Component {
       "pages/index/index",
       "pages/login/index",
       "pages/find/index",
-      "pages/mine/index"
+      "pages/mine/index",
+      "pages/favorite/index",
+      "pages/about/index",
+      "pages/interests/index"
     ],
     window: {
       backgroundTextStyle: "light",

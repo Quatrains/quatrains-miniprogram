@@ -1,4 +1,4 @@
-import Taro, { useState, useDidShow } from "@tarojs/taro";
+import Taro, { useState, useDidShow, useEffect } from "@tarojs/taro";
 import { View, Text, Image } from "@tarojs/components";
 import snowmanIcon from "../../assets/icons/snowman.png";
 import likeIcon from "../../assets/icons/like.png";
@@ -10,7 +10,7 @@ import "./index.less";
 const Index = () => {
   const [isAuthorized, setAuthorize] = useState(false);
   const [info, setInfo] = useState({ nickName: "", avatarUrl: "" });
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState({ have_interests: false });
 
   useDidShow(() => {
     (async () => {
@@ -19,8 +19,6 @@ const Index = () => {
         setAuthorize(true);
         const { userInfo } = await Taro.getUserInfo();
         setInfo(userInfo);
-        const res = await fetch("/user/profile");
-        setProfile(res);
       } else {
         setAuthorize(false);
         setInfo({ nickName: "登入", avatarUrl: snowmanIcon });
@@ -28,8 +26,23 @@ const Index = () => {
     })();
   }, []);
 
-  if (!info.nickName || !info.avatarUrl) {
-    return null;
+  useEffect(() => {
+    (async () => {
+      const res = await fetch("/user/profile");
+      setProfile(res);
+    })();
+  }, []);
+
+  const handleNavigate = page => () => {
+    Taro.navigateTo({ url: page });
+  };
+
+  if (!info.nickName || !info.avatarUrl || !profile) {
+    return <View>Loading...</View>;
+  }
+
+  if (!profile.have_interests) {
+    return Taro.redirectTo({ url: "/pages/interests/index" });
   }
 
   return (
@@ -55,11 +68,19 @@ const Index = () => {
         <Image className="mine-banner-image" src={info.avatarUrl} />
       </View>
       <View className="mine-content">
-        <View className="mine-content-item">
+        <View
+          className="mine-content-item"
+          onClick={handleNavigate("/pages/favorite/index")}
+        >
           <Image className="mine-content-item-image" src={likeIcon} />
           <Text className="mine-content-item-text">我的喜欢</Text>
         </View>
-        <View className="mine-content-item">
+        <View
+          className="mine-content-item"
+          onClick={() =>
+            Taro.showToast({ title: "功能还在开发中～", icon: "none" })
+          }
+        >
           <Image className="mine-content-item-image" src={calendarIcon} />
           <Text className="mine-content-item-text">诗词日历</Text>
         </View>
