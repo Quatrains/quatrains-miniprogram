@@ -38,7 +38,6 @@ const fetch = async (url, options) => {
   // 1) 处理请求失败
   // TODO: 请求错误处理
   if (res.errMsg !== "request:ok") {
-    // TODO: request:fail
     Taro.showToast({ title: "request:fail", icon: "none" });
     return {
       msg: res.errMsg,
@@ -46,10 +45,10 @@ const fetch = async (url, options) => {
     };
   }
 
-  // 2) 将cookie存入storage TODO: 待优化
+  // 2) 将cookie存入storage
   const cookie = res.header["set-cookie"] || res.header["Set-Cookie"] || "";
   if (cookie) {
-    setStorage(STORAGE_KEY_COOKIE);
+    setStorage(STORAGE_KEY_COOKIE, cookie);
   }
 
   // 3) 处理状态码

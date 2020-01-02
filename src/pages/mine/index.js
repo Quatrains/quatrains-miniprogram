@@ -4,11 +4,13 @@ import snowmanIcon from "../../assets/icons/snowman.png";
 import likeIcon from "../../assets/icons/like.png";
 import aboutIcon from "../../assets/icons/about.png";
 import calendarIcon from "../../assets/icons/calendar.png";
+import { fetch } from "../../action/fetch";
 import "./index.less";
 
 const Index = () => {
   const [isAuthorized, setAuthorize] = useState(false);
   const [info, setInfo] = useState({ nickName: "", avatarUrl: "" });
+  const [profile, setProfile] = useState(null);
 
   useDidShow(() => {
     (async () => {
@@ -17,6 +19,8 @@ const Index = () => {
         setAuthorize(true);
         const { userInfo } = await Taro.getUserInfo();
         setInfo(userInfo);
+        const res = await fetch("/user/profile");
+        setProfile(res);
       } else {
         setAuthorize(false);
         setInfo({ nickName: "登入", avatarUrl: snowmanIcon });
@@ -42,7 +46,11 @@ const Index = () => {
           >
             {info.nickName}
           </View>
-          <View className="mine-banner-days">已加入 61 天</View>
+          <View className="mine-banner-days">
+            {!isAuthorized
+              ? "快来加入我们吧"
+              : `已加入 ${profile.join_days} 天`}
+          </View>
         </View>
         <Image className="mine-banner-image" src={info.avatarUrl} />
       </View>
