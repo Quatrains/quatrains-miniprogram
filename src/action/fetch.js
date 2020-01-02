@@ -9,6 +9,7 @@ const STORAGE_KEY_COOKIE = "cookie";
 const preLogin = async () => {
   // 1. 从微信获取code
   const { code } = await Taro.login();
+  console.log(code);
   // 2. 将code发送给服务端，获取cookie
   const { header } = await Taro.request({
     url: `${API_PREFIX}/user/login`,
