@@ -10,7 +10,7 @@ import "./index.less";
 const Index = () => {
   const [isAuthorized, setAuthorize] = useState(false);
   const [info, setInfo] = useState({ nickName: "", avatarUrl: "" });
-  const [profile, setProfile] = useState({ have_interests: false });
+  const [profile, setProfile] = useState(null);
 
   useDidShow(() => {
     (async () => {
@@ -41,7 +41,7 @@ const Index = () => {
     return <View>Loading...</View>;
   }
 
-  if (!profile.have_interests) {
+  if (profile && !profile.have_interests) {
     return Taro.redirectTo({ url: "/pages/interests/index" });
   }
 
